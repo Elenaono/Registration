@@ -18,10 +18,11 @@ public:
     using VertexType = Vertex<T>;//点（x,y）
 
 public:
-    Triangle(const VertexType &_p1, const VertexType &_p2, const VertexType &_p3)
+    Triangle( const VertexType &_p1,  const VertexType &_p2, const VertexType &_p3)
             :	p1(_p1), p2(_p2), p3(_p3),
                  e1(_p1, _p2), e2(_p2, _p3), e3(_p3, _p1), isBad(false)
     {}
+
 
     //判断一点是否在三角形内部
     inline bool ContainsVertex(const VertexType &v) const
@@ -30,7 +31,8 @@ public:
         return almost_equal(p1, v) || almost_equal(p2, v) || almost_equal(p3, v);
     }
 
-    bool CircumCircleContains(const VertexType &v) const;   //判断一点是否在外接圆内（包括在外接圆上）
+      //判断一点是否在外接圆内（包括在外接圆上）
+    bool CircumCircleContains(const VertexType &v) ;
     bool ComputeAngle();// 计算角度  计算相似度
 
 
@@ -39,8 +41,10 @@ public:
     VertexType p1;
     VertexType p2;
     VertexType p3;
-    Point2f c;
-    Point2f mainpoint;
+    VertexType circum;
+    VertexType mainpoint;
+    float circum_radius;
+
 
     EdgeType e1;
     EdgeType e2;
@@ -48,25 +52,33 @@ public:
     double angle[3]{};
     bool isBad;
 
-    cv::Point2f getcircle() const;
-    cv::Point2f ComputeVertex() const;
+
+
+
 
 };
 
 template<class T>
-bool Triangle<T>::CircumCircleContains(const Triangle::VertexType &v) const {
+
+bool Triangle<T>::CircumCircleContains(const Triangle::VertexType &v)  {
     const T ab = p1.norm2();
     const T cd = p2.norm2();
     const T ef = p3.norm2();
 
-    const T circum_x = (ab * (p3.y - p2.y) + cd * (p1.y - p3.y) + ef * (p2.y - p1.y)) / (p1.x * (p3.y - p2.y) + p2.x * (p1.y - p3.y) + p3.x * (p2.y - p1.y));
-    const T circum_y = (ab * (p3.x - p2.x) + cd * (p1.x - p3.x) + ef * (p2.x - p1.x)) / (p1.y * (p3.x - p2.x) + p2.y * (p1.x - p3.x) + p3.y * (p2.x - p1.x));
+    circum.x = (ab * (p3.y - p2.y) + cd * (p1.y - p3.y) + ef * (p2.y - p1.y)) / (p1.x * (p3.y - p2.y) + p2.x * (p1.y - p3.y) + p3.x * (p2.y - p1.y));
+    circum.y = (ab * (p3.x - p2.x) + cd * (p1.x - p3.x) + ef * (p2.x - p1.x)) / (p1.y * (p3.x - p2.x) + p2.y * (p1.x - p3.x) + p3.y * (p2.x - p1.x));
+    circum.x = half(circum.x);
+    circum.y = half(circum.y);
 
-    const VertexType circum(half(circum_x), half(circum_y));
-    const T circum_radius = p1.dist2(circum);   // 得到当前三角形外接圆的半径
+    mainpoint.x = (p1.x - circum.x) + (p2.x - circum.x) + (p3.x - circum.x) +circum.x;
+    mainpoint.y = (p1.y - circum.y) + (p2.y - circum.y) + (p3.y - circum.y) +circum.y;
+
+    circum_radius = p1.dist2(circum);   // 得到当前三角形外接圆的半径
+
     const T dist = v.dist2(circum);
     return dist <= circum_radius;
 }
+
 
 
 
@@ -105,38 +117,6 @@ inline bool almost_equal(const Triangle<T> &t1, const Triangle<T> &t2)
     return	(almost_equal(t1.p1 , t2.p1) || almost_equal(t1.p1 , t2.p2) || almost_equal(t1.p1 , t2.p3)) &&
               (almost_equal(t1.p2 , t2.p1) || almost_equal(t1.p2 , t2.p2) || almost_equal(t1.p2 , t2.p3)) &&
               (almost_equal(t1.p3 , t2.p1) || almost_equal(t1.p3 , t2.p2) || almost_equal(t1.p3 , t2.p3));
-}
-
-template <class T>
-inline cv::Point2f Triangle<T>::getcircle() const {
-    const T ab = p1.norm2();
-    const T cd = p2.norm2();
-    const T ef = p3.norm2();
-
-    const T circum_x = (ab * (p3.y - p2.y) + cd * (p1.y - p3.y) + ef * (p2.y - p1.y)) / (p1.x * (p3.y - p2.y) + p2.x * (p1.y - p3.y) + p3.x * (p2.y - p1.y));
-    const T circum_y = (ab * (p3.x - p2.x) + cd * (p1.x - p3.x) + ef * (p2.x - p1.x)) / (p1.y * (p3.x - p2.x) + p2.y * (p1.x - p3.x) + p3.y * (p2.x - p1.x));
-
-    cv::Point2f  c,circum;
-    c=circum(half(circum_x), half(circum_y));
-    return c;
-
-}
-template <class T>
-inline cv::Point2f Triangle<T>::ComputeVertex() const {
-    cv::Point2f L1,L2,L3,mainpoint;
-    L1.x=p1.x-c.x;
-    L1.y=p1.y-c.y;
-    L2.x=p2.x-c.x;
-    L2.y=p2.y-c.y;
-    L3.x=p3.x-c.x;
-    L3.y=p3.y-c.y;
-    EdgeType  edge1,edge2,edge3,main;
-    edge1(p1,L1);edge2(p1,L1);edge3(p1,L1);
-    mainpoint.x=L1.x+L2.x+L3.x+c.x;
-    mainpoint.y=L1.y+L2.y+L3.y+c.y;
-
-    return mainpoint;
-
 }
 
 #endif

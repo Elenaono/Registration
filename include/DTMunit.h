@@ -27,6 +27,7 @@ using namespace cv;
 using namespace ORB_SLAM2;
 
 #define sizeofEdgeMatrix 500
+#define MAX_ARROR_SIZE  200
 /**
  * @brief 构建DTM的基本函数
  * @param initGood_matches
@@ -63,6 +64,7 @@ void UpdateKey(const vector<DMatch> &good_matches, const vector<cv::KeyPoint> &m
   * @return
   */
 vector<DMatch> BFmatchFunc(const cv::Mat &mDes1, const cv::Mat &mDes2, int threshold);
+vector<DMatch> KNNmatchFunc(const cv::Mat &mDes1, const cv::Mat &mDes2);
 
 /**
  * @brief 封装成函数

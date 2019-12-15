@@ -13,7 +13,7 @@ class Vertex
 {
 public:
     Vertex(): x(0), y(0){}  // Constructors  构造函数
-    Vertex(T _x, T _y): x(_x), y(_y){}     // 拷贝构造
+    Vertex(T _x, T _y): x(_x), y(_y){}     // gouzao构造
     Vertex(const Vertex &v): x(v.x), y(v.y), index(v.index){}     // 拷贝构造
     Vertex(T _x, T _y, T _index): x(_x), y(_y), index(_index){}
 

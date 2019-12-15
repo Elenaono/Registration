@@ -4,6 +4,9 @@
 #include <iterator>
 #include <algorithm>
 #include <array>
+#include <cmath>
+#include <Eigen/Core>
+#include <Eigen/Dense>
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/core.hpp>
@@ -18,9 +21,12 @@
 #include "include/delaunay.h"
 #include "include/DTMunit.h"
 
+#include "computeSM.h"
+
 using namespace std;
 using namespace cv;
 using namespace ORB_SLAM2;
+using namespace Eigen;
 
 #define d_max_value 50      // 暴力匹配的阈值
 #define m_max_value 5       // DTM边矩阵相似度阈值
@@ -40,8 +46,8 @@ int main()
 
 //    struct timespec time1 = {0, 0};       // 用于计时
 //    struct timespec time2 = {0, 0};
-    string file1 = "./data/desk1.png";
-    string file2 = "./data/desk2.png";
+    string file1 = "./data/pair6-1.png";
+    string file2 = "./data/pair6-2.png";
 
 //    string file1 = "./data/flag1.png";
 //    string file2 = "./data/flag2.png";
@@ -124,6 +130,7 @@ int main()
 
     //vector<DMatch> good_matches( BFmatchFunc(mDes1,mDes2,d_max_value) );
     vector<DMatch> good_matches( BFmatchFunc(descriptor_1,descriptor_2,d_max_value) );
+    //vector<DMatch> good_matches( KNNmatchFunc(descriptor_1,descriptor_2) );
     /***************  构建DT网络  ******************************/
     vector<DMatch> new_matches(ComputeDTMunit(m_max_value, good_matches, mvKeys1, mvKeys2, debugOne, debugTwo) );   //5
     cout <<"size one:\t" << new_matches.size() << endl;
@@ -135,6 +142,8 @@ int main()
         goodkeypoint2.push_back(mvKeys2[new_matches[i].trainIdx]);
 
     }
+    //输出到txt文件
+    /*
     fstream outputFile1;
     outputFile1.open("keypoint1.txt",std::ios::out);
     for (int i = 0; i < goodkeypoint1.size(); ++i)
@@ -146,7 +155,7 @@ int main()
     for (int i = 0; i < goodkeypoint2.size(); ++i)
         outputFile2<<goodkeypoint2[i].pt.x<<" "<<goodkeypoint2[i].pt.y<<endl;
     outputFile2.close();
-
+     */
 
     /***************  RANSAC 实验对照组  ******************************/
     cout << "\n采用RANSAC作为control group的实验结果：" << endl;

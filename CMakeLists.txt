@@ -27,7 +27,9 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 add_library(${PROJECT_NAME} SHARED
         src/ORBextractor.cpp
         src/computeSM.cpp
-        src/DTMunit.cpp include/dataimg.h)
+        src/DTMunit.cpp
+        include/dataimg.h
+        )
 
 target_link_libraries(${PROJECT_NAME}
         ${OpenCV_LIBS}
@@ -43,5 +45,3 @@ target_link_libraries(orbextract ${PROJECT_NAME})
 add_executable(creatDelaunay example/creatDelaunay.cpp)
 target_link_libraries(creatDelaunay ${PROJECT_NAME})
 
-#add_executable(test example/test.cpp)
-#target_link_libraries(test ${PROJECT_NAME})

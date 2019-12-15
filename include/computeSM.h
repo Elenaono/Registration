@@ -17,10 +17,13 @@
 #include "delaunay.h"
 
 
+
 // 计算相似度
-double SimilarityValue(Triangle<float> t1, Triangle<float> t2);
+double SimilarityValue(Triangle<float> t1,Triangle<float>t2);
 
 // 计算相似度矩阵
-void ComputeSimilarityMatrix(const Delaunay<float > & net1, const Delaunay<float> & net2, Eigen::MatrixXd &similarityMatrix);
+void ComputeSimilarityMatrix(const Delaunay<float> & net1, const Delaunay<float> & net2, Eigen::MatrixXd &similarityMatrix);
+
+double checkconstriant(const Delaunay<float> & net1, const Delaunay<float> & net2,const int t1Index,const int t2Index);
 
 #endif //ORB_DTM_COMPUTESM_H
