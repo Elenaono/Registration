@@ -210,41 +210,42 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
 
     Eigen::MatrixXd similarityMatrix(3000,3000);
     ComputeSimilarityMatrix(triangulation3,triangulation4,similarityMatrix);
-    vector<Point2f>pf1;
-    vector<Point2f>pf2;
-    int count=0;
+    vector<Vertex<float>>pf1;
+    vector<Vertex<float>>pf2;
+
     for (int i = 0; i <triangles1.size() ; i++) {
         for (int j = 0; j <triangles2.size() ; j++) {
-            if ((similarityMatrix(i,j))!=0 && checkconstriant(triangulation3,triangulation4,i,j))
+            if ((similarityMatrix(i,j))!=0 )
             {
-                Point2f  p1,p2,p3;
+                Vertex<float>  p1,p2,p3;
 
-                p1.x=triangles1[i].p1.x;
-                p1.y=triangles1[i].p1.y;
-                p2.x=triangles1[i].p2.x;
-                p2.y=triangles1[i].p2.y;
-                p3.x=triangles1[i].p3.x;
-                p3.y=triangles1[i].p3.y;
+                p1.x=triangles1[i].p1.x;p1.y=triangles1[i].p1.y;p1.index=triangles1[i].p1.index;
+                p2.x=triangles1[i].p2.x;p2.y=triangles1[i].p2.y;p2.index=triangles1[i].p2.index;
+                p3.x=triangles1[i].p3.x;p3.y=triangles1[i].p3.y;p3.index=triangles1[i].p3.index;
+                Point _p1,_p2,_p3;
+                _p1.x=p1.x;_p1.y=p1.y;
+                _p2.x=p2.x;_p2.y=p2.y;
+                _p3.x=p3.x;_p3.y=p3.y;
                 Rect rect(0,0,img1.size().width,img1.size().height);
-                if (rect.contains(p1)&&rect.contains(p2)&&rect.contains(p3))
+                if (rect.contains(_p1)&&rect.contains(_p2)&&rect.contains(_p3))
                 {
                     pf1.push_back(p1);
                     pf1.push_back(p2);
                     pf1.push_back(p3);
-                    count++;
+
                 }
 
-                Point2f  p4,p5,p6;
-
-                p4.x=triangles2[j].p1.x;
-                p4.y=triangles2[j].p1.y;
-                p5.x=triangles2[j].p2.x;
-                p5.y=triangles2[j].p2.y;
-                p6.x=triangles2[j].p3.x;
-                p6.y=triangles2[j].p3.y;
+                Vertex<float>  p4,p5,p6;
+                p4.x=triangles2[j].p1.x;p4.y=triangles2[j].p1.y;p4.index=triangles1[i].p1.index;
+                p5.x=triangles2[j].p2.x;p5.y=triangles2[j].p2.y;p5.index=triangles1[i].p2.index;
+                p6.x=triangles2[j].p3.x;p6.y=triangles2[j].p3.y;p6.index=triangles1[i].p3.index;
+                Point _p4,_p5,_p6;
+                _p4.x=p4.x;_p4.y=p4.y;
+                _p5.x=p5.x;_p5.y=p5.y;
+                _p6.x=p6.x;_p6.y=p6.y;
 
                 Rect _rect(0,0,img2.size().width,img2.size().height);
-                if (_rect.contains(p4)&&_rect.contains(p5)&&_rect.contains(p6))
+                if (_rect.contains(_p4)&&_rect.contains(_p5)&&_rect.contains(_p6))
                 {
                     pf2.push_back(p4);
                     pf2.push_back(p5);
@@ -258,7 +259,7 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
     }
    // cout<<"origin_pf1:"<<pf1.size()<<endl;
     //cout<<"origin_pf2:"<<pf2.size()<<endl;
-
+/*
     //去除重复的点
     vector<Point2f>::iterator it1,it;
     for (it=pf1.begin()+1; it!=pf1.end(); )
@@ -288,16 +289,15 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
         }
 
     }
+    */
 
-    vector<KeyPoint>kp1,kp2;
-    KeyPoint::convert(pf1,kp1,1,1,0,-1);
-    KeyPoint::convert(pf2,kp2,1,1,0,-1);
+
     Mat kp1_img,kp2_img;
     img1.copyTo(kp1_img);
     img2.copyTo(kp2_img);
 
-    drawKeypoints(kp1_img,kp1,kp1_img,Scalar(0,0,255));
-    drawKeypoints(kp2_img,kp1,kp2_img,Scalar(0,0,255));
+    //drawKeypoints(kp1_img,kp1,kp1_img,Scalar(0,0,255));
+    //drawKeypoints(kp2_img,kp1,kp2_img,Scalar(0,0,255));
     imshow("triangle1",kp1_img);
     imshow("triangle2",kp2_img);
     waitKey(0);
