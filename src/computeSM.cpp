@@ -35,9 +35,24 @@ void ComputeSimilarityMatrix(const Delaunay<float> & net1, const Delaunay<float>
 
             double a = SimilarityValue(triangleList1[i], triangleList2[j]);
            //std::cout << "a="<< a <<std::endl;
-            similarityMatrix(i,j) = (a < 0.7) ? 0 : a; //相似度阈值为0.75
+            similarityMatrix(i,j) = (a < 0.6) ? 0 : a; //相似度阈值为0.75
         }
     }
+    fstream outputFile1;
+    outputFile1.open("a.txt",std::ios::out);
+    int r=similarityMatrix.rows();
+    int c=similarityMatrix.cols();
+
+    for (int i = 0; i < r; ++i) {
+        for (int j = 0; j < c; ++j) {
+            outputFile1 << similarityMatrix(i, j)<<" ";
+        }
+        outputFile1<<endl;
+        outputFile1<<endl;
+    }
+    outputFile1.close();
+
+
 }
 
 
@@ -63,7 +78,7 @@ double SimilarityValue(Triangle<float> t1,Triangle<float>t2)
 //        std::cout << "dx[i]:" << dx[i]  << std::endl;
 
         u[i] = pow(cos(Ks * (1 - dx[i])), Ns);
-//        std::cout << "u[i]:" << u[i]  << std::endl;
+//       std::cout << "u[i]:" << u[i]  << std::endl;
     }
 
     return (u[0]+u[1]+u[2]) / 3;
@@ -73,20 +88,26 @@ double checkconstriant(const Delaunay<float> & net1, const Delaunay<float> & net
 {
     std::vector<Triangle<float> > triangleList1(net1.GetTriangles());
     std::vector<Triangle<float> > triangleList2(net2.GetTriangles());
-    cv::Point2f p0,p1,p2,p3,p4,p5;
+    Vertex<float> p0,p1,p2,p3,p4,p5;
     p0.x= triangleList1[t1Index].p1.x;
     p0.y= triangleList1[t1Index].p1.y;
+    p0.index=triangleList1[t1Index].p1.index;
     p1.x= triangleList1[t1Index].p2.x;
     p1.y= triangleList1[t1Index].p2.y;
+    p1.index=triangleList1[t1Index].p2.index;
     p2.x= triangleList1[t1Index].p3.x;
     p2.y= triangleList1[t1Index].p3.y;
+    p2.index=triangleList1[t1Index].p3.index;
 
     p3.x= triangleList2[t2Index].p1.x;
     p3.y= triangleList2[t2Index].p1.y;
+    p3.index=triangleList1[t2Index].p1.index;
     p4.x= triangleList2[t2Index].p2.x;
     p4.y= triangleList2[t2Index].p2.y;
+    p4.index=triangleList1[t2Index].p2.index;
     p5.x= triangleList2[t2Index].p3.x;
     p5.y= triangleList2[t2Index].p3.y;
+    p5.index=triangleList1[t2Index].p3.index;
 
 
 
@@ -101,7 +122,7 @@ double checkconstriant(const Delaunay<float> & net1, const Delaunay<float> & net
     std::vector<Edge<float>> edgelist1(net1.GetEdges());
     std::vector<Edge<float>> edgelist2(net2.GetEdges());
 
-    for (int i = 0; i <edgelist1.size() ; ++i)
+    for (int i = 0; i <edgelist1.size() ; i++)
     {
         if((edgelist1[i].p1.x==p0.x && edgelist1[i].p1.y==p0.y)||(edgelist1[i].p2.x==p0.x  && edgelist1[i].p2.y==p0.y))
         {
@@ -119,13 +140,11 @@ double checkconstriant(const Delaunay<float> & net1, const Delaunay<float> & net
 
         }
     }
-    cout<<"p0EdgeIndex:"<<p0EdgeIndex.size()<<endl;
-    for (int k = 0; k <p0EdgeIndex.size() ; ++k)
-    {
-        cout<<"  p0:"<<p0EdgeIndex[k]<<endl;
+    //cout<<"p0EdgeIndex:"<<p0EdgeIndex.size()<<endl<<"p1EdgeIndex:"<<p1EdgeIndex.size()<<endl<<"p2EdgeIndex:"<<p2EdgeIndex.size()<<endl;
 
-    }
-    for (int i = 0; i <edgelist2.size() ; ++i)
+
+
+    for (int i = 0; i <edgelist2.size() ; i++)
     {
         if((edgelist2[i].p1.x==p3.x && edgelist2[i].p1.y==p3.y)||(edgelist2[i].p2.x==p3.x  && edgelist2[i].p2.y==p3.y))
         {
@@ -185,6 +204,8 @@ double checkconstriant(const Delaunay<float> & net1, const Delaunay<float> & net
         }
 
     }
+
+
     for (int i = 0; i <p0EdgeIndex.size() ; ++i)
     {
         for (int j = 0; j < p2EdgeIndex.size(); ++j)
@@ -386,7 +407,7 @@ double checkconstriant(const Delaunay<float> & net1, const Delaunay<float> & net
 
     }
 
-   //这里得到三个Point2f类型的点
+   //这里得到三个点
     Vertex<float> _p0(p0.x,p0.y);
     Vertex<float> _p1(p1.x,p1.y);
     Vertex<float> _p2(outP[0].x,outP[0].y);
@@ -417,7 +438,8 @@ double checkconstriant(const Delaunay<float> & net1, const Delaunay<float> & net
     double similrity1=SimilarityValue(outT1,_outT1);
     double similrity2=SimilarityValue(outT_1,outT_2);
     double similrity3=SimilarityValue(outT_3,outT_4);
-    if(similrity1<0.75||similrity2<0.75||similrity3<0.75)
+    cout<<"similrity1:"<<similrity1<<endl;
+    if(similrity1<0.6||similrity2<0.6||similrity3<0.6)
     {
         return 0;
     }
