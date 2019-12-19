@@ -11,7 +11,7 @@
 #include<Eigen/Dense>
 
 
-const double PI = 3.1415926;
+const double PI = 4.0*atan(1.0f);
 const double Pa = 0.5;
 const double Ks = PI/2;
 const double Ns = 3;
@@ -35,9 +35,10 @@ void ComputeSimilarityMatrix(const Delaunay<float> & net1, const Delaunay<float>
 
             double a = SimilarityValue(triangleList1[i], triangleList2[j]);
            //std::cout << "a="<< a <<std::endl;
-            similarityMatrix(i,j) = (a < 0.6) ? 0 : a; //相似度阈值为0.75
+            similarityMatrix(i,j) = (a < 0.7) ? 0 : a; //相似度阈值为0.75
         }
     }
+/*
     fstream outputFile1;
     outputFile1.open("a.txt",std::ios::out);
     int r=similarityMatrix.rows();
@@ -52,7 +53,7 @@ void ComputeSimilarityMatrix(const Delaunay<float> & net1, const Delaunay<float>
     }
     outputFile1.close();
 
-
+*/
 }
 
 
@@ -438,8 +439,9 @@ double checkconstriant(const Delaunay<float> & net1, const Delaunay<float> & net
     double similrity1=SimilarityValue(outT1,_outT1);
     double similrity2=SimilarityValue(outT_1,outT_2);
     double similrity3=SimilarityValue(outT_3,outT_4);
-    cout<<"similrity1:"<<similrity1<<endl;
-    if(similrity1<0.6||similrity2<0.6||similrity3<0.6)
+    //cout<<"similrity1:"<<similrity1<<endl;
+
+    if(similrity1<0.7||similrity2<0.7||similrity3<0.7)
     {
         return 0;
     }

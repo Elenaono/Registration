@@ -43,10 +43,10 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
 
     Delaunay<float> triangulation1;
     const std::vector<Triangle<float> > triangles1 = triangulation1.Triangulate(points1);  //逐点插入法
-    triangulation1.ComputeEdgeMatrix();
+   // triangulation1.ComputeEdgeMatrix();
     std::cout << "三角形初始个数" << triangles1.size() << " triangles generated" << endl;
     const std::vector<Edge<float> > edges1 = triangulation1.GetEdges();
-    const std::vector<Triangle<float> > tri1 = triangulation1.GetTriangles();
+
 
     for (const auto &e : edges1) {
         line(feature1, Point(e.p1.x, e.p1.y), Point(e.p2.x, e.p2.y), Scalar(0, 0, 255), 1);
@@ -83,7 +83,7 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
 
     Delaunay<float> triangulation2;
     const std::vector<Triangle<float> > triangles2 = triangulation2.Triangulate(points2);  //逐点插入法
-    triangulation2.ComputeEdgeMatrix();
+    //triangulation2.ComputeEdgeMatrix();
 //    std::cout << "\t\t" <<triangles2.size() << " triangles generated"<<endl;
     const std::vector<Edge<float> > edges2 = triangulation2.GetEdges();
     const std::vector<Triangle<float> > tri2 = triangulation2.GetTriangles();
@@ -110,29 +110,39 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
     Mat Init1, Init2;
     img1.copyTo(Init1);
     img2.copyTo(Init2);
-    cv::drawMatches(feature1, mvKeys1, feature2, mvKeys2, initGood_matches, beforeOpt);
-    imshow("before optimization", beforeOpt);
-    imwrite("./figure/beforeDTM.png", beforeOpt);
+    //cv::drawMatches(feature1, mvKeys1, feature2, mvKeys2, initGood_matches, beforeOpt);
+    cv::drawKeypoints(img1,mvKeys1,img1,Scalar(0,0,255));
+    cv::drawKeypoints(img2,mvKeys2,img2,Scalar(0,0,255));
+    imwrite("./figure/im1.png", img1);
+    imwrite("./figure/im2.png", img2);
+    //imshow("before optimization", beforeOpt);
+    //imwrite("./figure/beforeDTM.png", beforeOpt);
     waitKey(0);
 
 
 /************ 显示相似优化后的DT网络 ****************/
 
     //三角形相似
+    const int tri1_size=triangles1.size();
+    const int tri2_size=triangles2.size();
+    //cout<<"tri1_size"<<tri1_size<<endl;
+    //cout<<"tri2_size"<<tri2_size<<endl;
 
-    Eigen::MatrixXd similarityMatrix(triangles1.size(), triangles2.size());
+    Eigen::MatrixXd similarityMatrix(tri1_size, tri2_size);
     ComputeSimilarityMatrix(triangulation1, triangulation2, similarityMatrix);
     vector<Vertex<float>> pf1;
     vector<Vertex<float>> pf2;
 
-    for (int i = 0; i < triangles1.size(); i++) {
+
+
+    for (int i = 0; i <1; i++) {
         for (int j = 0; j < triangles2.size(); j++) {
 
             //checkconstriant约束
-          /*  if ((similarityMatrix(i, j)) != 0 && checkconstriant(triangulation1,triangulation2,i,j)==0)
+/*
+           if ((similarityMatrix(i, j)) != 0 && checkconstriant(triangulation1,triangulation2,i,j)==0)
                 similarityMatrix(i, j)=0;
-                */
-
+*/
 
             if ((similarityMatrix(i, j)) != 0) {
                 Vertex<float> p1, p2, p3;
@@ -192,8 +202,7 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
 
     }
 
-    // cout<<"origin_pf1:"<<pf1.size()<<endl;
-    //cout<<"origin_pf2:"<<pf2.size()<<endl;
+
 
     //去除重复的点
 
@@ -220,6 +229,8 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
         }
 
     }
+
+
     fstream outputFile1;
     outputFile1.open("pf1.txt",std::ios::out);
     for (int i = 0; i < pf1.size(); ++i)
@@ -236,25 +247,28 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
 
     //存入DMatch
     vector<DMatch> third_goodmatches;
-
-
     for (int i = 0; i < pf1.size(); i++) {
         DMatch d1(pf1[i].index, pf2[i].index, 0);
         third_goodmatches.emplace_back(d1);
 
     }
+
+
     //delaunay——1
+
     std::vector<Vertex<float> > point5;
     for (const auto &g:third_goodmatches) {
         point5.emplace_back(Vertex<float>(mvKeys1[g.trainIdx].pt.x, mvKeys1[g.trainIdx].pt.y, g.imgIdx));
     }
     Delaunay<float> triangulation5;
-    const std::vector<Triangle<float> > triangles5 = triangulation5.Triangulate(point5);  //逐点插入法
-    cout << "ssss:" << triangles5.size() << endl;
+    const std::vector<Triangle<float> > triangles5 = triangulation5.Triangulate(pf1);  //逐点插入法
+
+   // cout << "ssss:" << triangles5.size() << endl;
     const std::vector<Edge<float> > edges5 = triangulation5.GetEdges();
     for (const auto &e : edges5) {
         line(feature5, Point(e.p1.x, e.p1.y), Point(e.p2.x, e.p2.y), Scalar(0, 0, 255), 1);
     }
+
 
     //delaunay——2
     std::vector<Vertex<float> > point6;
@@ -262,25 +276,32 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
         point6.emplace_back(Vertex<float>(mvKeys2[g.trainIdx].pt.x, mvKeys2[g.trainIdx].pt.y, g.imgIdx));
     }
     Delaunay<float> triangulation6;
-    const std::vector<Triangle<float> > triangles6 = triangulation6.Triangulate(point6);  //逐点插入法
+    const std::vector<Triangle<float> > triangles6 = triangulation6.Triangulate(pf2);  //逐点插入法
+
     const std::vector<Edge<float> > edges6 = triangulation6.GetEdges();
     for (const auto &e : edges6) {
         line(feature6, Point(e.p1.x, e.p1.y), Point(e.p2.x, e.p2.y), Scalar(0, 0, 255), 1);
     }
-
+    cout<<"origin_pf1:"<<pf1.size()<<endl;
+    cout<<"origin_pf2:"<<pf2.size()<<endl;
     Mat aftersimilar;
-   // cv::drawMatches(feature5, mvKeys1, feature6, mvKeys2, third_goodmatches, aftersimilar);
-   /*
-    Point px1(506,143);
-    Point px2(380,152);
-    circle(img1,px1,3,Scalar(255,0,0),-1);
-    circle(img2,px2,3,Scalar(255,0,0),-1);
-*/
-    imwrite("./figure/px1.png",feature5);
-    imwrite("./figure/px2.png",feature6);
+    Mat img_1,img_2;
+    img1.copyTo(img_1);
+    img2.copyTo(img_2);
+
+    //drawKeypoints(img1,mvKeys1,img_1,Scalar(0,0,255));
+    //drawKeypoints(img2,mvKeys1,img_2,Scalar(0,0,255));
+    cv::drawMatches(img1, mvKeys1, img2, mvKeys2, third_goodmatches, aftersimilar);
+    imshow("feature5",feature5);
+    imshow("feature6",feature6);
+
+    imwrite("./figure/img1.png",feature5);
+    imwrite("./figure/img2.png",feature6);
     cout << "third_goodmatches:" << third_goodmatches.size() << endl;
-    imshow(" aftersimilar", aftersimilar);
-    imwrite("./figure/aftersimilar.png", aftersimilar);
+
+   // imwrite("./figure/aftersimilar.png", aftersimilar);
+    imwrite("./figure/img1_keypoint.png", img_1);
+    imwrite("./figure/img2_keypoint.png", img_2);
     waitKey(0);
 
 
@@ -313,6 +334,7 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
             newGood_matches.erase(newGood_matches.begin() + i - 1);
         }
     }
+    cout<<"newGood_matches.size:"<<newGood_matches.size()<<endl;
 //    cout << "new size:\t" << newGood_matches.size()<<endl;
 
     /************ 显示优化后的DT网络 ****************/

@@ -46,13 +46,13 @@ int main()
 
 //    struct timespec time1 = {0, 0};       // 用于计时
 //    struct timespec time2 = {0, 0};
-    string file1 = "./data/pair6-1.png";
-    string file2 = "./data/pair6-2.png";
+    string file1 = "./data/desk1.png";
+    string file2 = "./data/desk2.png";
 
 //    string file1 = "./data/flag1.png";
 //    string file2 = "./data/flag2.png";
     /**************** 配置信息 ******************/
-    int nFeatures =1000;        // 特征点数量
+    int nFeatures =1500;        // 特征点数量
     float fScaleFactor =1.2;    // 图像金字塔的缩放尺度
     int nLevels =8;             // 金字塔层数
     int fIniThFAST =18;         // 提取FAST角点的阈值  两个阈值进行选择

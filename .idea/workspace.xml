@@ -14,149 +14,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a79e8a69-bb1c-4b40-a159-68e207e14ab2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/ORB-DTM.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/a.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.5.1/CMakeCCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.5.1/CMakeCXXCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.5.1/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.5.1/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.5.1/CMakeSystem.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.5.1/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.5.1/CompilerIdC/a.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.5.1/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.5.1/CompilerIdCXX/a.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/CXX.includecache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/src/DTMunit.cpp.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/src/ORBextractor.cpp.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/src/computeSM.cpp.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/cmake.check_cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/creatDelaunay.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/creatDelaunay.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/creatDelaunay.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/creatDelaunay.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/creatDelaunay.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/creatDelaunay.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/creatDelaunay.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.cxx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/orbextract.dir/CXX.includecache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/orbextract.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/orbextract.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/orbextract.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/orbextract.dir/depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/orbextract.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/orbextract.dir/example/orbextract.cpp.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/orbextract.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/orbextract.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/orbextract.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/ORB-DTM.cbp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake-build-debug/orbextract" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/figure/aftersimilar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/figure/px1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/figure/px2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a.txt" beforeDir="false" afterPath="$PROJECT_DIR$/a.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/src/DTMunit.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/src/DTMunit.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/src/computeSM.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/src/computeSM.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/orbextract.dir/example/orbextract.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/orbextract.dir/example/orbextract.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/orbextract" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/orbextract" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/orbextract.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/example/orbextract.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/figure/aftersimilar.png" beforeDir="false" afterPath="$PROJECT_DIR$/figure/aftersimilar.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/figure/beforeDTM.png" beforeDir="false" afterPath="$PROJECT_DIR$/figure/beforeDTM.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/1.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/2.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/2_l.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/2l.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/2r.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/2r2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/2r3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/4_B.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/4_T.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/4_l.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/4_o.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/4_r.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/6-NQ.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/6-t1.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/6-t1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/6-t2.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/6-t2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/611.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/621.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/C13.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/C23.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/Sh2000.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/Sh2001.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/pair10-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/pair10-2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/pair5-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/pair5-2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/pair5-3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/pair5-4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/pair7-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/pair7-2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/pair8-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/remote_img/pair8-2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/1a.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/1b.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/C13.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/C23.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/IMG_2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/IMG_2bis.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/b1.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/b2.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/boat1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/boat2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/boat3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/circle.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/circle2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/flag_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/flag_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/img1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/img2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/img8.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/lenag1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/lenag2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/map1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/map2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/pair1-1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/pair1-2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/pair4-1.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/pair4-2.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/pair5-1.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/pair5-2.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/pair6-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/pair6-2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/wall1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/wall2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/wall4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/source/wall6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keypoint1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keypoint2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/figure/px1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/figure/px2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/dataimg.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/dataimg.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/libORB-DTM.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/libORB-DTM.so" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DTMunit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTMunit.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/computeSM.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/computeSM.cpp" afterDir="false" />
@@ -251,8 +120,18 @@
       <workItem from="1576400707185" duration="11722000" />
       <workItem from="1576464222532" duration="25537000" />
       <workItem from="1576546297945" duration="15382000" />
-      <workItem from="1576569555323" duration="1363000" />
+      <workItem from="1576569555323" duration="9753000" />
+      <workItem from="1576635125407" duration="21885000" />
+      <workItem from="1576719007989" duration="8250000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial">
+      <created>1576571718856</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1576571718859</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -299,31 +178,35 @@
     <state x="356" y="184" key="FileChooserDialogImpl/65.24.1087.840@65.24.1087.840" timestamp="1576571417134" />
     <state x="507" y="188" key="FileChooserDialogImpl/65.24.1649.860@65.24.1649.860" timestamp="1575290205758" />
     <state x="322" y="166" key="FileChooserDialogImpl/65.24.959.744@65.24.959.744" timestamp="1576051885279" />
-    <state width="1035" height="261" key="GridCell.Tab.0.bottom" timestamp="1576569543499">
+    <state x="418" y="317" width="324" height="307" key="Github.ShareDialog" timestamp="1576571971528">
       <screen x="65" y="24" width="1087" height="840" />
     </state>
-    <state width="1035" height="261" key="GridCell.Tab.0.bottom/65.24.1087.840@65.24.1087.840" timestamp="1576569543499" />
+    <state x="418" y="317" width="324" height="307" key="Github.ShareDialog/65.24.1087.840@65.24.1087.840" timestamp="1576571971528" />
+    <state width="1035" height="89" key="GridCell.Tab.0.bottom" timestamp="1576735343273">
+      <screen x="65" y="24" width="1087" height="840" />
+    </state>
+    <state width="1035" height="89" key="GridCell.Tab.0.bottom/65.24.1087.840@65.24.1087.840" timestamp="1576735343273" />
     <state width="1601" height="108" key="GridCell.Tab.0.bottom/65.24.1653.864@65.24.1653.864" timestamp="1575342314755" />
     <state width="1803" height="463" key="GridCell.Tab.0.bottom/65.24.1855.1176@65.24.1855.1176" timestamp="1576483614912" />
     <state width="907" height="19" key="GridCell.Tab.0.bottom/65.24.959.744@65.24.959.744" timestamp="1576410869174" />
-    <state width="1035" height="261" key="GridCell.Tab.0.center" timestamp="1576569543498">
+    <state width="1035" height="89" key="GridCell.Tab.0.center" timestamp="1576735343273">
       <screen x="65" y="24" width="1087" height="840" />
     </state>
-    <state width="1035" height="261" key="GridCell.Tab.0.center/65.24.1087.840@65.24.1087.840" timestamp="1576569543498" />
+    <state width="1035" height="89" key="GridCell.Tab.0.center/65.24.1087.840@65.24.1087.840" timestamp="1576735343273" />
     <state width="1601" height="108" key="GridCell.Tab.0.center/65.24.1653.864@65.24.1653.864" timestamp="1575342314754" />
     <state width="1803" height="463" key="GridCell.Tab.0.center/65.24.1855.1176@65.24.1855.1176" timestamp="1576483614912" />
     <state width="907" height="19" key="GridCell.Tab.0.center/65.24.959.744@65.24.959.744" timestamp="1576410869174" />
-    <state width="1035" height="261" key="GridCell.Tab.0.left" timestamp="1576569543498">
+    <state width="1035" height="89" key="GridCell.Tab.0.left" timestamp="1576735343272">
       <screen x="65" y="24" width="1087" height="840" />
     </state>
-    <state width="1035" height="261" key="GridCell.Tab.0.left/65.24.1087.840@65.24.1087.840" timestamp="1576569543498" />
+    <state width="1035" height="89" key="GridCell.Tab.0.left/65.24.1087.840@65.24.1087.840" timestamp="1576735343272" />
     <state width="1601" height="108" key="GridCell.Tab.0.left/65.24.1653.864@65.24.1653.864" timestamp="1575342314752" />
     <state width="1803" height="463" key="GridCell.Tab.0.left/65.24.1855.1176@65.24.1855.1176" timestamp="1576483614911" />
     <state width="907" height="19" key="GridCell.Tab.0.left/65.24.959.744@65.24.959.744" timestamp="1576410869173" />
-    <state width="1035" height="261" key="GridCell.Tab.0.right" timestamp="1576569543499">
+    <state width="1035" height="89" key="GridCell.Tab.0.right" timestamp="1576735343273">
       <screen x="65" y="24" width="1087" height="840" />
     </state>
-    <state width="1035" height="261" key="GridCell.Tab.0.right/65.24.1087.840@65.24.1087.840" timestamp="1576569543499" />
+    <state width="1035" height="89" key="GridCell.Tab.0.right/65.24.1087.840@65.24.1087.840" timestamp="1576735343273" />
     <state width="1601" height="108" key="GridCell.Tab.0.right/65.24.1653.864@65.24.1653.864" timestamp="1575342314755" />
     <state width="1803" height="463" key="GridCell.Tab.0.right/65.24.1855.1176@65.24.1855.1176" timestamp="1576483614912" />
     <state width="907" height="19" key="GridCell.Tab.0.right/65.24.959.744@65.24.959.744" timestamp="1576410869174" />
@@ -334,6 +217,10 @@
     <state x="414" y="78" key="SettingsEditor/65.24.1653.864@65.24.1653.864" timestamp="1575341601000" />
     <state x="571" y="163" key="SettingsEditor/65.24.1855.1176@65.24.1855.1176" timestamp="1576412937423" />
     <state x="70" y="39" key="SettingsEditor/65.24.959.744@65.24.959.744" timestamp="1576223130818" />
+    <state x="266" y="49" width="683" height="762" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1576663728079">
+      <screen x="65" y="24" width="1087" height="840" />
+    </state>
+    <state x="266" y="49" width="683" height="762" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/65.24.1087.840@65.24.1087.840" timestamp="1576663728079" />
     <state x="184" y="89" width="719" height="678" key="search.everywhere.popup" timestamp="1575449765371">
       <screen x="65" y="24" width="959" height="744" />
     </state>
