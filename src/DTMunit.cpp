@@ -38,12 +38,12 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
 //    cout << "DT one:" << endl;
     vector<Vertex<float> > points1;//二维点坐标集合
     for (const auto &p:initGood_matches) {
-        points1.emplace_back(Vertex<float>(mvKeys1[p.queryIdx].pt.x, mvKeys1[p.queryIdx].pt.y, p.imgIdx));
+        points1.emplace_back(Vertex<float>(mvKeys1[p.queryIdx].pt.x, mvKeys1[p.queryIdx].pt.y, p.queryIdx));
     }
 
     Delaunay<float> triangulation1;
     const std::vector<Triangle<float> > triangles1 = triangulation1.Triangulate(points1);  //逐点插入法
-   // triangulation1.ComputeEdgeMatrix();
+    triangulation1.ComputeEdgeMatrix();
     std::cout << "三角形初始个数" << triangles1.size() << " triangles generated" << endl;
     const std::vector<Edge<float> > edges1 = triangulation1.GetEdges();
 
@@ -78,12 +78,12 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
 //    cout << "DT two:" << endl;
     vector<Vertex<float> > points2;
     for (const auto &p:initGood_matches) {
-        points2.emplace_back(Vertex<float>(mvKeys2[p.trainIdx].pt.x, mvKeys2[p.trainIdx].pt.y, p.imgIdx));
+        points2.emplace_back(Vertex<float>(mvKeys2[p.trainIdx].pt.x, mvKeys2[p.trainIdx].pt.y, p.trainIdx));
     }
 
     Delaunay<float> triangulation2;
     const std::vector<Triangle<float> > triangles2 = triangulation2.Triangulate(points2);  //逐点插入法
-    //triangulation2.ComputeEdgeMatrix();
+    triangulation2.ComputeEdgeMatrix();
 //    std::cout << "\t\t" <<triangles2.size() << " triangles generated"<<endl;
     const std::vector<Edge<float> > edges2 = triangulation2.GetEdges();
     const std::vector<Triangle<float> > tri2 = triangulation2.GetTriangles();
@@ -107,202 +107,13 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
 //    cout << "\t匹配:" << endl;
     cout << "\t\tInitialmatch:" << initGood_matches.size() << endl;
     Mat beforeOpt;
-    Mat Init1, Init2;
-    img1.copyTo(Init1);
-    img2.copyTo(Init2);
-    //cv::drawMatches(feature1, mvKeys1, feature2, mvKeys2, initGood_matches, beforeOpt);
-    cv::drawKeypoints(img1,mvKeys1,img1,Scalar(0,0,255));
-    cv::drawKeypoints(img2,mvKeys2,img2,Scalar(0,0,255));
+    cv::drawMatches(feature1, mvKeys1, feature2, mvKeys2, initGood_matches, beforeOpt);
     imwrite("./figure/im1.png", img1);
     imwrite("./figure/im2.png", img2);
-    //imshow("before optimization", beforeOpt);
-    //imwrite("./figure/beforeDTM.png", beforeOpt);
+    imshow("before optimization", beforeOpt);
+    imwrite("./figure/beforeDTM.png", beforeOpt);
     waitKey(0);
 
-
-/************ 显示相似优化后的DT网络 ****************/
-
-    //三角形相似
-    const int tri1_size=triangles1.size();
-    const int tri2_size=triangles2.size();
-    //cout<<"tri1_size"<<tri1_size<<endl;
-    //cout<<"tri2_size"<<tri2_size<<endl;
-
-    Eigen::MatrixXd similarityMatrix(tri1_size, tri2_size);
-    ComputeSimilarityMatrix(triangulation1, triangulation2, similarityMatrix);
-    vector<Vertex<float>> pf1;
-    vector<Vertex<float>> pf2;
-
-
-
-    for (int i = 0; i <1; i++) {
-        for (int j = 0; j < triangles2.size(); j++) {
-
-            //checkconstriant约束
-/*
-           if ((similarityMatrix(i, j)) != 0 && checkconstriant(triangulation1,triangulation2,i,j)==0)
-                similarityMatrix(i, j)=0;
-*/
-
-            if ((similarityMatrix(i, j)) != 0) {
-                Vertex<float> p1, p2, p3;
-
-                p1.x = triangles1[i].p1.x;
-                p1.y = triangles1[i].p1.y;
-                p1.index = triangles1[i].p1.index;
-                p2.x = triangles1[i].p2.x;
-                p2.y = triangles1[i].p2.y;
-                p2.index = triangles1[i].p2.index;
-                p3.x = triangles1[i].p3.x;
-                p3.y = triangles1[i].p3.y;
-                p3.index = triangles1[i].p3.index;
-                Point _p1, _p2, _p3;
-                _p1.x = p1.x;
-                _p1.y = p1.y;
-                _p2.x = p2.x;
-                _p2.y = p2.y;
-                _p3.x = p3.x;
-                _p3.y = p3.y;
-                Rect rect(0, 0, img1.size().width, img1.size().height);
-                if (rect.contains(_p1) && rect.contains(_p2) && rect.contains(_p3)) {
-                    pf1.push_back(p1);
-                    pf1.push_back(p2);
-                    pf1.push_back(p3);
-
-                }
-
-                Vertex<float> p4, p5, p6;
-                p4.x = triangles2[j].p1.x;
-                p4.y = triangles2[j].p1.y;
-                p4.index = triangles2[j].p1.index;
-                p5.x = triangles2[j].p2.x;
-                p5.y = triangles2[j].p2.y;
-                p5.index = triangles2[j].p2.index;
-                p6.x = triangles2[j].p3.x;
-                p6.y = triangles2[j].p3.y;
-                p6.index = triangles2[j].p3.index;
-                Point _p4, _p5, _p6;
-                _p4.x = p4.x;
-                _p4.y = p4.y;
-                _p5.x = p5.x;
-                _p5.y = p5.y;
-                _p6.x = p6.x;
-                _p6.y = p6.y;
-
-                Rect _rect(0, 0, img2.size().width, img2.size().height);
-                if (_rect.contains(_p4) && _rect.contains(_p5) && _rect.contains(_p6)) {
-                    pf2.push_back(p4);
-                    pf2.push_back(p5);
-                    pf2.push_back(p6);
-                }
-
-            }
-
-        }
-
-    }
-
-
-
-    //去除重复的点
-
-    vector<Vertex<float>>::iterator it1, it;
-    for (it = pf1.begin() + 1; it != pf1.end();) {
-        it1 = find(pf1.begin(), it, *it);
-
-        if (it1 != it) {
-            it = pf1.erase(it);
-        } else {
-            it++;
-        }
-
-    }
-
-    vector<Vertex<float>>::iterator it2, its;
-    for (its = pf2.begin() + 1; its != pf2.end();) {
-        it2 = find(pf2.begin(), its, *its);
-
-        if (it2 != its) {
-            its = pf2.erase(its);
-        } else {
-            its++;
-        }
-
-    }
-
-
-    fstream outputFile1;
-    outputFile1.open("pf1.txt",std::ios::out);
-    for (int i = 0; i < pf1.size(); ++i)
-        outputFile1<<pf1[i].x<<" "<<pf1[i].y<<" "<<pf1[i].index<<endl;
-    outputFile1.close();
-
-    fstream outputFile2;
-    outputFile2.open("pf2.txt",std::ios::out);
-    for (int i = 0; i < pf2.size(); ++i)
-        outputFile2<<pf2[i].x<<" "<<pf2[i].y<<" "<<pf2[i].index<<endl;
-    outputFile2.close();
-
-
-
-    //存入DMatch
-    vector<DMatch> third_goodmatches;
-    for (int i = 0; i < pf1.size(); i++) {
-        DMatch d1(pf1[i].index, pf2[i].index, 0);
-        third_goodmatches.emplace_back(d1);
-
-    }
-
-
-    //delaunay——1
-
-    std::vector<Vertex<float> > point5;
-    for (const auto &g:third_goodmatches) {
-        point5.emplace_back(Vertex<float>(mvKeys1[g.trainIdx].pt.x, mvKeys1[g.trainIdx].pt.y, g.imgIdx));
-    }
-    Delaunay<float> triangulation5;
-    const std::vector<Triangle<float> > triangles5 = triangulation5.Triangulate(pf1);  //逐点插入法
-
-   // cout << "ssss:" << triangles5.size() << endl;
-    const std::vector<Edge<float> > edges5 = triangulation5.GetEdges();
-    for (const auto &e : edges5) {
-        line(feature5, Point(e.p1.x, e.p1.y), Point(e.p2.x, e.p2.y), Scalar(0, 0, 255), 1);
-    }
-
-
-    //delaunay——2
-    std::vector<Vertex<float> > point6;
-    for (const auto &g:third_goodmatches) {
-        point6.emplace_back(Vertex<float>(mvKeys2[g.trainIdx].pt.x, mvKeys2[g.trainIdx].pt.y, g.imgIdx));
-    }
-    Delaunay<float> triangulation6;
-    const std::vector<Triangle<float> > triangles6 = triangulation6.Triangulate(pf2);  //逐点插入法
-
-    const std::vector<Edge<float> > edges6 = triangulation6.GetEdges();
-    for (const auto &e : edges6) {
-        line(feature6, Point(e.p1.x, e.p1.y), Point(e.p2.x, e.p2.y), Scalar(0, 0, 255), 1);
-    }
-    cout<<"origin_pf1:"<<pf1.size()<<endl;
-    cout<<"origin_pf2:"<<pf2.size()<<endl;
-    Mat aftersimilar;
-    Mat img_1,img_2;
-    img1.copyTo(img_1);
-    img2.copyTo(img_2);
-
-    //drawKeypoints(img1,mvKeys1,img_1,Scalar(0,0,255));
-    //drawKeypoints(img2,mvKeys1,img_2,Scalar(0,0,255));
-    cv::drawMatches(img1, mvKeys1, img2, mvKeys2, third_goodmatches, aftersimilar);
-    imshow("feature5",feature5);
-    imshow("feature6",feature6);
-
-    imwrite("./figure/img1.png",feature5);
-    imwrite("./figure/img2.png",feature6);
-    cout << "third_goodmatches:" << third_goodmatches.size() << endl;
-
-   // imwrite("./figure/aftersimilar.png", aftersimilar);
-    imwrite("./figure/img1_keypoint.png", img_1);
-    imwrite("./figure/img2_keypoint.png", img_2);
-    waitKey(0);
 
 
 
@@ -311,7 +122,7 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
     Eigen::MatrixXd::Index maxRow, maxCol;
     Eigen::MatrixXd edgeMatrix = Eigen::MatrixXd::Zero(sizeofEdgeMatrix,
                                                        sizeofEdgeMatrix);  //ComputeEdgeMatrix() 在此处也修改了 20,20 ，需要同步修改，后期改进此处
-    edgeMatrix = triangulation5.GetEdgeMatrix() - triangulation6.GetEdgeMatrix();
+    edgeMatrix = triangulation1.GetEdgeMatrix() - triangulation2.GetEdgeMatrix();
     //    double value =0;
     //    value = edgeMatrix_.norm();
     //    cout << "\tvalue: " << value <<  endl;      // 相似度
@@ -326,7 +137,7 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
 //    cout << "候选外点：" << mvKeys2[good_matches[maxCol].trainIdx].pt << endl;
 
     // 通过DT网络的边矩阵之差的范数，删除列和较大的候选外点集
-    vector<DMatch> newGood_matches(third_goodmatches);
+    vector<DMatch> newGood_matches(initGood_matches);
 //    cout << "\nold size:\t" << newGood_matches.size()<<endl;
     for (int i = sizeofEdgeMatrix; i != 0; i--) {
         if ((edgeMatrix.cwiseAbs().colwise().sum())(0, i - 1) >= threshold) {
@@ -335,15 +146,17 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
         }
     }
     cout<<"newGood_matches.size:"<<newGood_matches.size()<<endl;
+
 //    cout << "new size:\t" << newGood_matches.size()<<endl;
 
     /************ 显示优化后的DT网络 ****************/
+
     if (newGood_matches.empty())
         return newGood_matches;
     ///delaunay three
     std::vector<Vertex<float> > points3;
     for (const auto &g:newGood_matches) {
-        points3.emplace_back(Vertex<float>(mvKeys1[g.queryIdx].pt.x, mvKeys1[g.queryIdx].pt.y, g.imgIdx));
+        points3.emplace_back(Vertex<float>(mvKeys1[g.queryIdx].pt.x, mvKeys1[g.queryIdx].pt.y, g.queryIdx));
     }
     Delaunay<float> triangulation3;
     const std::vector<Triangle<float> > triangles3 = triangulation3.Triangulate(points3);  //逐点插入法
@@ -359,9 +172,9 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
                           (t.mainpoint.y - t.circum.y) * (t.mainpoint.y - t.circum.y));
 //        cout << "sidelength: " << sideLength << endl;
         if (sideLength < MAX_ARROR_SIZE) {
-            circle(feature3, Point(t.circum.x, t.circum.y), 0.1, Scalar(0, 255, 0));
-            arrowedLine(feature3, Point(t.circum.x, t.circum.y), Point(t.mainpoint.x, t.mainpoint.y), Scalar(0, 255, 0),
-                        1, 8);
+           // circle(feature3, Point(t.circum.x, t.circum.y), 0.1, Scalar(0, 255, 0));
+           // arrowedLine(feature3, Point(t.circum.x, t.circum.y), Point(t.mainpoint.x, t.mainpoint.y), Scalar(0, 255, 0),
+                       // 1, 8);
         }
     }
 
@@ -369,7 +182,7 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
 //    cout << "\tDT four:" << endl;
     std::vector<Vertex<float> > points4;
     for (const auto &g:newGood_matches) {
-        points4.emplace_back(Vertex<float>(mvKeys2[g.trainIdx].pt.x, mvKeys2[g.trainIdx].pt.y, g.imgIdx));
+        points4.emplace_back(Vertex<float>(mvKeys2[g.trainIdx].pt.x, mvKeys2[g.trainIdx].pt.y, g.trainIdx));
     }
 
     Delaunay<float> triangulation4;
@@ -387,23 +200,198 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
                           (t.mainpoint.y - t.circum.y) * (t.mainpoint.y - t.circum.y));
 //        cout << "sidelength: " << sideLength << endl;
         if (sideLength < MAX_ARROR_SIZE) {
-            circle(feature4, Point(t.circum.x, t.circum.y), 0.1, Scalar(0, 255, 0));
-            arrowedLine(feature4, Point(t.circum.x, t.circum.y), Point(t.mainpoint.x, t.mainpoint.y), Scalar(0, 255, 0),
-                        1, 8);
+           // circle(feature4, Point(t.circum.x, t.circum.y), 0.1, Scalar(0, 255, 0));
+           // arrowedLine(feature4, Point(t.circum.x, t.circum.y), Point(t.mainpoint.x, t.mainpoint.y), Scalar(0, 255, 0),
+                      //  1, 8);
         }
     }
 
 
     Mat afterOpt;
     cv::drawMatches(feature3, mvKeys1, feature4, mvKeys2, newGood_matches, afterOpt);
-    cout << "goodmatches:" << newGood_matches.size() << endl;
+   // cout << "goodmatches:" << newGood_matches.size() << endl;
     imshow("after optimization", afterOpt);
     imwrite("./figure/DTM.png", afterOpt);
     waitKey(0);
-}
+
+
 
 //    cout << "Finished in function!!!" << endl;
     // return newGood_matches;
+/************ 显示相似优化后的DT网络 ****************/
+
+//三角形相似
+    const int tri3_size=triangles3.size();
+    const int tri4_size=triangles4.size();
+   // cout<<"tri1_size"<<tri3_size<<endl;
+   // cout<<"tri2_size"<<tri4_size<<endl;
+
+    Eigen::MatrixXd similarityMatrix(500, 500);
+    ComputeSimilarityMatrix(triangulation3, triangulation4, similarityMatrix);
+    vector<Vertex<float>> pf1;
+    vector<Vertex<float>> pf2;
+
+    for (int i = 0; i <1; i++) {
+    for (int j = 0; j < triangles4.size(); j++) {
+
+    //checkconstriant约束
+    /*
+               if ((similarityMatrix(i, j)) != 0 && checkconstriant(triangulation1,triangulation2,i,j)==0)
+                    similarityMatrix(i, j)=0;
+
+    */
+    if ((similarityMatrix(i, j)) != 0) {
+            Vertex<float> p1(triangles1[i].p1.x,triangles1[i].p1.y,triangles1[i].p1.index);
+            Vertex<float> p2(triangles1[i].p2.x,triangles1[i].p2.y,triangles1[i].p2.index);
+            Vertex<float> p3(triangles1[i].p3.x,triangles1[i].p3.y,triangles1[i].p3.index);
+
+            Point _p1(p1.x,p1.y);
+            Point _p2(p2.x,p2.y);
+            Point _p3;(p3.x,p3.y);
+
+            Rect rect(0, 0, img1.size().width, img1.size().height);
+            if (rect.contains(_p1) && rect.contains(_p2) && rect.contains(_p3)) {
+            pf1.push_back(p1);
+            pf1.push_back(p2);
+            pf1.push_back(p3);
+
+    }
+
+            Vertex<float> p4(triangles2[i].p1.x,triangles2[i].p1.y,triangles2[i].p1.index);
+            Vertex<float> p5(triangles2[i].p2.x,triangles2[i].p2.y,triangles2[i].p2.index);
+            Vertex<float> p6(triangles2[i].p3.x,triangles2[i].p3.y,triangles2[i].p3.index);
+
+            Point _p4(p4.x,p4.y);
+            Point _p5(p5.x,p5.y);
+            Point _p6(p6.x,p6.y);
+
+            Rect _rect(0, 0, img2.size().width, img2.size().height);
+            if (_rect.contains(_p4) && _rect.contains(_p5) && _rect.contains(_p6)) {
+            pf2.push_back(p4);
+            pf2.push_back(p5);
+            pf2.push_back(p6);
+           }
+
+        }
+
+      }
+
+    }
+
+
+
+    //去除重复的点
+
+    vector<Vertex<float>>::iterator it1, it;
+    for (it = pf1.begin() + 1; it != pf1.end();) {
+        it1 = find(pf1.begin(), it, *it);
+
+        if (it1 != it)
+        {it = pf1.erase(it);}
+        else {
+        it++;
+           }
+
+    }
+
+    vector<Vertex<float>>::iterator it2, its;
+    for (its = pf2.begin() + 1; its != pf2.end();) {
+        it2 = find(pf2.begin(), its, *its);
+
+        if (it2 != its) {
+        its = pf2.erase(its);
+        }
+        else {
+        its++;
+        }
+
+    }
+
+
+    fstream outputFile1;
+    outputFile1.open("pf1.txt",std::ios::out);
+    for (int i = 0; i < pf1.size(); ++i)
+    outputFile1<<pf1[i].x<<" "<<pf1[i].y<<" "<<pf1[i].index<<endl;
+    outputFile1.close();
+
+    fstream outputFile2;
+    outputFile2.open("pf2.txt",std::ios::out);
+    for (int i = 0; i < pf2.size(); ++i)
+    outputFile2<<pf2[i].x<<" "<<pf2[i].y<<" "<<pf2[i].index<<endl;
+    outputFile2.close();
+
+
+    cout<<"origin_pf1:"<<pf1.size()<<endl;
+    cout<<"origin_pf2:"<<pf2.size()<<endl;
+    //存入DMatch
+    vector<DMatch> third_goodmatches;
+    for (int i = 0; i < pf1.size(); i++) {
+    DMatch d1(pf1[i].index, pf2[i].index, 0);
+    third_goodmatches.emplace_back(d1);
+
+    }
+
+
+    //delaunay——1
+
+    std::vector<Vertex<float> > point5;
+    for (const auto &g:third_goodmatches) {
+    point5.emplace_back(Vertex<float>(mvKeys1[g.queryIdx].pt.x, mvKeys1[g.queryIdx].pt.y, g.queryIdx));
+        cout<<"g.queryIdx:"<<g.queryIdx<<endl;
+        cout<<"g.queryIdx:"<<mvKeys1[g.queryIdx].pt.x<<" "<<mvKeys1[g.queryIdx].pt.y<<endl;
+    }
+
+    Delaunay<float> triangulation5;
+    const std::vector<Triangle<float> > triangles5 = triangulation5.Triangulate(point5);  //逐点插入法
+
+    // cout << "ssss:" << triangles5.size() << endl;
+    const std::vector<Edge<float> > edges5 = triangulation5.GetEdges();
+    for (const auto &e : edges5) {
+    line(feature5, Point(e.p1.x, e.p1.y), Point(e.p2.x, e.p2.y), Scalar(0, 0, 255), 1);
+    }
+
+
+    //delaunay——2
+    std::vector<Vertex<float> > point6;
+    for (const auto &g:third_goodmatches) {
+    point6.emplace_back(Vertex<float>(mvKeys2[g.trainIdx].pt.x, mvKeys2[g.trainIdx].pt.y, g.trainIdx));
+    }
+    Delaunay<float> triangulation6;
+    const std::vector<Triangle<float> > triangles6 = triangulation6.Triangulate(point6);  //逐点插入法
+
+    const std::vector<Edge<float> > edges6 = triangulation6.GetEdges();
+    for (const auto &e : edges6) {
+    line(feature6, Point(e.p1.x, e.p1.y), Point(e.p2.x, e.p2.y), Scalar(0, 0, 255), 1);
+    }
+
+   // Mat aftersimilar;
+    Mat img_1,img_2;
+    img1.copyTo(img_1);
+    img2.copyTo(img_2);
+
+    Mat aftersimilar;
+    cv::drawMatches(feature5, mvKeys1, feature6, mvKeys2, third_goodmatches, aftersimilar);
+
+    cout<<"third_goodmatches:"<<third_goodmatches.size()<<endl;
+
+    //drawKeypoints(img1,mvKeys1,img_1,Scalar(0,0,255));
+    //drawKeypoints(img2,mvKeys1,img_2,Scalar(0,0,255));
+    //cv::drawMatches(feature5, mvKeys1, feature6, mvKeys2, third_goodmatches, aftersimilar);
+    imshow("feature5",feature5);
+    imshow("feature6",feature6);
+
+    imwrite("./figure/img1.png",feature5);
+    imwrite("./figure/img2.png",feature6);
+    cout << "third_goodmatches:" << third_goodmatches.size() << endl;
+
+    imshow("aftersimilar",aftersimilar);
+
+    imwrite("./figure/aftersimilar.png", aftersimilar);
+    imwrite("./figure/img1_keypoint.png", img_1);
+    imwrite("./figure/img2_keypoint.png", img_2);
+    waitKey(0);
+
+}
 
 
 
@@ -548,7 +536,7 @@ vector<DMatch> ComputeDTMunit(int threshold, const vector<DMatch> &initGood_matc
         //筛选匹配
         int temp = 0;
         for (int l = 0; l < mDes1.rows; l++) {
-            if (matches[l].distance <= 0.6 * max_dist) {
+            if (matches[l].distance <= 0.5 * max_dist) {
                 matches[l].imgIdx = temp;
                 good_matches.emplace_back(matches[l]);
                 temp++;

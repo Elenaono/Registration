@@ -29,7 +29,7 @@ using namespace ORB_SLAM2;
 using namespace Eigen;
 
 #define d_max_value 50      // 暴力匹配的阈值
-#define m_max_value 5       // DTM边矩阵相似度阈值
+#define m_max_value 5     // DTM边矩阵相似度阈值
 
 #define d_ransac_value 80
 #define threshold_value 15
@@ -52,7 +52,7 @@ int main()
 //    string file1 = "./data/flag1.png";
 //    string file2 = "./data/flag2.png";
     /**************** 配置信息 ******************/
-    int nFeatures =1500;        // 特征点数量
+    int nFeatures =800;        // 特征点数量
     float fScaleFactor =1.2;    // 图像金字塔的缩放尺度
     int nLevels =8;             // 金字塔层数
     int fIniThFAST =18;         // 提取FAST角点的阈值  两个阈值进行选择
@@ -130,6 +130,7 @@ int main()
 
     //vector<DMatch> good_matches( BFmatchFunc(mDes1,mDes2,d_max_value) );
     vector<DMatch> good_matches( BFmatchFunc(descriptor_1,descriptor_2,d_max_value) );
+
     //vector<DMatch> good_matches( KNNmatchFunc(descriptor_1,descriptor_2) );
     /***************  构建DT网络  ******************************/
     vector<DMatch> new_matches(ComputeDTMunit(m_max_value, good_matches, mvKeys1, mvKeys2, debugOne, debugTwo) );   //5

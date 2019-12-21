@@ -26,6 +26,9 @@ void ComputeSimilarityMatrix(const Delaunay<float> & net1, const Delaunay<float>
     std::vector<Triangle<float> > triangleList2(net2.GetTriangles());
 
 
+
+
+
     for (int i = 0; i < triangleList1.size(); i++)
     {
 
@@ -35,10 +38,10 @@ void ComputeSimilarityMatrix(const Delaunay<float> & net1, const Delaunay<float>
 
             double a = SimilarityValue(triangleList1[i], triangleList2[j]);
            //std::cout << "a="<< a <<std::endl;
-            similarityMatrix(i,j) = (a < 0.7) ? 0 : a; //相似度阈值为0.75
+            similarityMatrix(i,j) = (a < 0.97) ? 0 : a; //相似度阈值为0.75
         }
     }
-/*
+
     fstream outputFile1;
     outputFile1.open("a.txt",std::ios::out);
     int r=similarityMatrix.rows();
@@ -53,7 +56,7 @@ void ComputeSimilarityMatrix(const Delaunay<float> & net1, const Delaunay<float>
     }
     outputFile1.close();
 
-*/
+
 }
 
 
@@ -82,8 +85,28 @@ double SimilarityValue(Triangle<float> t1,Triangle<float>t2)
 //       std::cout << "u[i]:" << u[i]  << std::endl;
     }
 
+    /*
+        double sideLength1;
+        orientation1
+        sideLength1 = sqrt((t1.mainpoint.x - t1.circum.x) * (t1.mainpoint.x - t1.circum.x) +
+                          (t1.mainpoint.y - t1.circum.y) * (t1.mainpoint.y - t1.circum.y));
+//        cout << "sidelength: " << sideLength << endl;
+        if (sideLength < MAX_ARROR_SIZE) {
+            // circle(feature4, Point(t.circum.x, t.circum.y), 0.1, Scalar(0, 255, 0));
+            // arrowedLine(feature4, Point(t.circum.x, t.circum.y), Point(t.mainpoint.x, t.mainpoint.y), Scalar(0, 255, 0),
+            //  1, 8);
+
+    }
+     */
+
+
     return (u[0]+u[1]+u[2]) / 3;
 }
+
+
+
+
+
 
 double checkconstriant(const Delaunay<float> & net1, const Delaunay<float> & net2,const int t1Index,const int t2Index)
 {
@@ -449,3 +472,26 @@ double checkconstriant(const Delaunay<float> & net1, const Delaunay<float> & net
     return 1;
 
 }
+/*
+double localtion_constriant(Triangle<float> t1,Triangle<float>t2)
+{
+    Vertex<float> vo(t1.p1.x-t1.circum.x,t1.p1.y-t1.circum.y);
+    Vertex<float> vv1(t1.p2.x-t1.p1.x,t1.p2.y-t1.p1.y);
+    double ori1=vo.x*vv1.x+vo.y*vv1.y;
+    Vertex<float> vv2(t1.p3.x-t1.p1.x,t1.p3.y-t1.p1.y);
+    double ori2=(vo.x*vv2.x+vo.y*vv2.y);
+
+
+
+    Vertex<float> _vo(t2.p1.x-t2.circum.x,t2.p1.y-t2.circum.y);
+    Vertex<float> _vv1(t2.p2.x-t2.p1.x,t2.p2.y-t2.p1.y);
+    double _ori1=_vo.x*_vv1.x+_vo.y*_vv1.y;
+    Vertex<float> _vv2(t2.p3.x-t2.p1.x,t1.p3.y-t2.p1.y);
+    double _ori2=_vo.x*_vv1.x+_vo.y*_vv1.y;
+
+    if(ori1)
+
+return 0;
+
+}
+ */
