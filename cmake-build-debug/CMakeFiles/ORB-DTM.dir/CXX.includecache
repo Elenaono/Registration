@@ -231,6 +231,16 @@ Eigen/Core
 -
 Eigen/Dense
 -
+cmath
+-
+opencv2/opencv.hpp
+-
+opencv2/highgui/highgui.hpp
+-
+opencv2/core/core.hpp
+-
+iostream
+-
 
 /usr/include/eigen3/Eigen/Cholesky
 Core

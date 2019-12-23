@@ -26,4 +26,7 @@ void ComputeSimilarityMatrix(const Delaunay<float> & net1, const Delaunay<float>
 
 double checkconstriant(const Delaunay<float> & net1, const Delaunay<float> & net2,const int t1Index,const int t2Index);
 
+void get_circle_coordinates(Mat img,Triangle<float> t1);
+
+double ComEntropy(Mat img1, Mat img2, double img1_entropy, double img2_entropy);
 #endif //ORB_DTM_COMPUTESM_H

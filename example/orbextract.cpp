@@ -29,7 +29,7 @@ using namespace ORB_SLAM2;
 using namespace Eigen;
 
 #define d_max_value 50      // 暴力匹配的阈值
-#define m_max_value 5     // DTM边矩阵相似度阈值
+#define m_max_value 7     // DTM边矩阵相似度阈值
 
 #define d_ransac_value 80
 #define threshold_value 15
