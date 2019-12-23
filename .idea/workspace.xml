@@ -13,25 +13,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79e8a69-bb1c-4b40-a159-68e207e14ab2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a.txt" beforeDir="false" afterPath="$PROJECT_DIR$/a.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/src/DTMunit.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/src/DTMunit.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/src/computeSM.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ORB-DTM.dir/src/computeSM.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/orbextract.dir/example/orbextract.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/orbextract.dir/example/orbextract.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/orbextract" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/orbextract" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/orbextract.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/example/orbextract.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/figure/DTM.png" beforeDir="false" afterPath="$PROJECT_DIR$/figure/DTM.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/computeSM.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/computeSM.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libORB-DTM.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/libORB-DTM.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pf1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pf2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTMunit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTMunit.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/computeSM.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/computeSM.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="a79e8a69-bb1c-4b40-a159-68e207e14ab2" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -129,6 +111,7 @@
       <workItem from="1576907095001" duration="19441000" />
       <workItem from="1576978816459" duration="23814000" />
       <workItem from="1577064106915" duration="29492000" />
+      <workItem from="1577107104730" duration="399000" />
     </task>
     <task id="LOCAL-00001" summary="Initial">
       <created>1576571718856</created>
